@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>这是最新的修改12123asas</title>
+     <script src="js/jquery-1.11.3.min.js"></script>
+</head>
+<body>
+
+
+<style type="text/css">
+	*{padding:0;margin:0;}
+	body{overflow: hidden; background: #f12; }
+	li{list-style:none;}
+  .sonw{position: fixed; color:#fff;}
+</style>
+ 
+
+ <div class="snowCont ">
+
+ </div>
+
+
+<script type="text/javascript">
+
+
+  
+  function Sonw(parame){
+     this.cupArr=[40,30,36,20,26,34];
+     this.txtArr=["❆","❅","❄"];
+     this.fontTxt=this.txtArr[Math.floor(Math.random()*this.txtArr.length)];
+     this.fontsize=this.cupArr[Math.floor(Math.random()*this.cupArr.length)];
+     this.ele="";
+  }
+
+Sonw.prototype.element=function(parentElement){
+    this.ele=$("<div class='sonw'>"+this.fontTxt+"</div>")
+       $(parentElement).append(this.ele);
+    var maxLeft=$(window).width();
+      var maxTop=$(window).height();
+      this.ele.css({fontSize:this.fontsize,left:Math.floor(Math.random()*maxLeft),top:Math.floor(Math.random()*maxTop)}); 
+}
+
+
+var snowFlake=function(){
+  var maxLeft=$(window).width();
+  var maxTop=$(window).height();
+  
+     for(var i=0;i<20;i++){
+    var sonw=new Sonw();
+    sonw.element("body")
+   }
+
+
+var timeNew=setInterval(function(){
+   for(var i=0;i<20;i++){
+    var sonw=new Sonw();
+     sonw.element("body")
+   }
+   var childrenSonw=$(".sonw");
+   childrenSonw.each(function(){
+         var thisLeft=parseInt($(this).css("left"));
+         var thisTop=parseInt($(this).css("top"));
+          if(thisLeft>maxLeft || thisTop>maxTop){
+            $(this).remove();
+            }
+        })
+  },5000)
+
+var timeOver=setInterval(function(){
+      var childrenSonw=$(".sonw");
+        childrenSonw.each(function(){
+          $(this).css({left:"+="+Math.floor(Math.random()*20),top:"+="+Math.floor(Math.random()*30)})
+        })
+      },400)
+
+}
+snowFlake()
+/*这里简单的更改了数据   */
+
+
+</script>
+
+
+
+
+	
+</body>
+</html>
